@@ -100,7 +100,8 @@ Adapun outputnya sebagai berikut:
 Dari output di atas terlihat bahwa nilai minimum 0 hanya terdapat pada kolom 'GRS'. Nilai tersebut bermakna bahwa ada beberapa rumah yang tidak memiliki garasi mobil, sehingga itu merupakan hal yang wajar. Jadi, patut diduga bahwa ini merupakan data yang valid atau bukan _missing value_. 
 
 #### 3. Exploratory Data Analysis - Handling Missing Values, Drop Unnecessary Columns, and Duplicates
-**a. Handling Missing Values**
+**a. Handling Missing Values** 
+
 Setelah mengecek nilai minimum 0, langkah selanjutnya adalah menangani _missing value_ menggunakan fungsi `isnull().sum()`. Adapun outputnya sebagai berikut: 
 
 ![4-value](https://github.com/balle97/model-regresi/assets/128248022/16658e8e-6b74-4460-967d-df78e8238113) 
@@ -109,7 +110,8 @@ Dari output di atas terlihat bahwa semua kolom tidak memiliki _missing value_.
 
 Ada beberapa teknik untuk mengatasi missing value, antara lain: menghapus atau melakukan drop terhadap data yang hilang, menggantinya dengan mean atau median, serta memprediksi dan mengganti nilainya dengan teknik regresi. Tapi, untuk proyek ini, semua teknik tersebut tidak diperlukan.
 
-**b. Drop Unnecessary Columns**
+**b. Drop Unnecessary Columns** 
+
 Setelah mengecek _missing value_, langkah selanjutnya adalah membuat kolom baru untuk mempermudah melihat harga rumah. Kolom tersebut diberi nama 'HARGA(JUTA)'. Untuk melakukannya, bagi nilai harga dengan nilai 1.000.000 (satu juta) untuk menghilangkan angka 0 sebanyak 6 digit. Adapun outputnya sebagai berikut: 
 
 ![5-kolom-baru](https://github.com/balle97/model-regresi/assets/128248022/bb41ad16-28d5-4eb1-9eae-bbffdb7a4b5e) 
@@ -122,7 +124,8 @@ Setelah itu, menghapus kolom yang tidak diperlukan menggunakan fungsi `drop()`. 
 
 Dari output di atas terlihat bahwa kolom pada tabel di atas sekarang tersisa **6 kolom**.
 
-**c. Handling Duplicates**
+**c. Handling Duplicates** 
+
 Selanjutnya, menangani _duplicate_ data menggunakan fungsi `drop.duplicates()`. Adapun outputnya sebagai berikut: 
 
 ![7-duplikasi](https://github.com/balle97/model-regresi/assets/128248022/76133453-ba66-479d-b58c-ab30c8bff815) 
@@ -130,7 +133,8 @@ Selanjutnya, menangani _duplicate_ data menggunakan fungsi `drop.duplicates()`. 
 Dari output di atas terlihat bahwa adanya perubahan pada ukuran dataset dari 1.010 baris menjadi **967 baris**. Hal ini menunjukkan bahwa di dalam dataset tersebut terdapat duplikasi data sebesar **43 baris**.
 
 #### 4. Exploratory Data Analysis - Visualizing and Handling Outliers
-**a. Visualize Outliers on Numerical Features**
+**a. Visualize Outliers on Numerical Features** 
+
 Pada tahap ini, akan dideteksi outlier menggunakan teknik visualisasi data (*boxplot*). Akan divisualisasikan data numerik dengan *boxplot* secara horizontal. Menurut **Seltman** dalam “*Experimental Design and Analysis*”, *boxplot* menunjukkan ukuran lokasi dan penyebaran, serta memberikan informasi tentang simetri dan *outliers*. Adapun outputnya sebagai berikut: 
 
 ![8-outlier-LB](https://github.com/balle97/model-regresi/assets/128248022/291a967a-18bc-4545-b9a0-411359dd4adb) 
@@ -141,7 +145,8 @@ Pada tahap ini, akan dideteksi outlier menggunakan teknik visualisasi data (*box
 
 Dari output di atas terlihat bahwa semua kolom memiliki _outliers_. 
 
-**b. Handle Outliers with IQR Method**
+**b. Handle Outliers with IQR Method** 
+
 Ada beberapa teknik untuk menangani _outliers_, antara lain: Hypothesis Testing, Z-score method, IQR Method. Untuk proyek ini, akan menggunakan **metode IQR**. Metode IQR akan digunakan untuk mengidentifikasi outlier yang berada di luar Q1 dan Q3. Nilai apapun yang berada di luar batas ini dianggap sebagai outlier.
 
 Menurut **Seltman** dalam “*Experimental Design and Analysis*”, *outliers* yang diidentifikasi oleh boxplot disebut juga **boxplot outliers** yang didefinisikan sebagai data yang nilainya 1.5 QR di atas Q3 atau 1.5 QR di bawah Q1.
@@ -167,7 +172,8 @@ Perlu mengecek ukuran dataset setelah di-drop outliers menggunakan fungsi `shape
 Datasetnya sekarang sudah bersih dan memiliki **667 sampel**.
 
 #### 5. Exploratory Data Analysis - Univariate and Multivariate Analysis
-**a. Univariate Analysis**
+**a. Univariate Analysis** 
+
 Untuk proyek ini, hanya melakukan _univariate analysis_ pada fitur numerik saja. Karena dataset yang digunakan tidak memiliki fitur categorikal. Akan menggunakan histogram untuk melihat masing-masing fitur tersebut. Adapun outputnya sebagai berikut: 
 
 ![11-univariate](https://github.com/balle97/model-regresi/assets/128248022/735041c9-c24e-4008-b40d-26619be99c18) 
@@ -176,7 +182,8 @@ Lihatlah histogram untuk variabel "HARGA(JUTA)" yang merupakan fitur target (lab
 * Peningkatan harga rumah sebanding dengan penurunan jumlah sampel. Hal ini dapat terlihat jelas dari histogram "HARGA(JUTA)" yang grafiknya mengalami penurunan seiring dengan semakin banyaknya jumlah sampel pada sumbu y.
 * Distribusi harga miring ke kanan (right-skewed). Hal ini akan berimplikasi pada model.
 
-**b. Multivariate Analysis**
+**b. Multivariate Analysis** 
+
 Untuk proyek ini, hanya melakukan _multivariate analysis_ pada fitur numerik saja. Karena dataset yang digunakan tidak memiliki fitur categorikal. Akan mengamati hubungan antar fitur numerik menggunakan fungsi `pairplot()`. Fungsi pairplot dari library seaborn menunjukkan relasi pasangan dalam dataset. Adapun outputnya sebagai berikut: 
 
 ![12-multivariate](https://github.com/balle97/model-regresi/assets/128248022/671147c0-adb0-4595-81db-16df64f11dab) 
