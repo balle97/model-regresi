@@ -8,7 +8,7 @@
 
 Rumah adalah salah satu dari tiga kebutuhan dasar manusia, selain kebutuhan sandang dan pangan. Sejalan dengan konsep Hierarki Kebutuhan menurut **Maslow** yang menyebutkan bahwa rumah sebagai bagian dari kebutuhan fisiologis manusia. Seiring perkembangan waktu, kebutuhan fisiologis manusia semakin meningkat, termasuk keinginan untuk memiliki rumah. Dengan meningkatnya daya beli masyarakat, harga rumah terus mengalami peningkatan. Para pengembang properti bersaing untuk membangun properti rumah sebagai bentuk investasi. Namun, fluktuasi harga rumah yang sulit diprediksi dengan pasti meningkatkan risiko investasi. 
 
-Menurut **Albani Musyafa (2013)**, harga rumah dipengaruhi oleh faktor lokasi dan biaya lahan [1]. Namun, Menurut **Hendra et al. (2017)** menambahkan bahwa faktor akses transportasi juga berpengaruh [2]. Selain itu, penelitian dari **Saiful et al. (2021)** menunjukkan bahwa penggunaan machine learning dengan algoritma linear regression dapat memberikan prediksi harga rumah dengan tingkat akurasi yang memuaskan [3]. Namun, penelitian dari **Haryanto et al. (2023)** menunjukkan bahwa algoritma random forest regression memberikan akurasi yang lebih tinggi dalam memprediksi harga rumah dibandingkan dengan metode lainnya [4]. 
+Menurut **Albani Musyafa (2013)**, harga rumah dipengaruhi oleh faktor lokasi dan biaya lahan [[1](https://www.researchgate.net/publication/325656226_KOMPOSISI_HARGA_JUAL_RUMAH_TINGGAL_LAYAK_HUNI_DI_YOGYAKARTA_STUDI_KASUS_PEMBANGUNAN_RUMAH_TIPE_90115_DI_LUAR_KOMPLEKS_PERUMAHAN)]. Namun, Menurut **Hendra et al. (2017)** menambahkan bahwa faktor akses transportasi juga berpengaruh [[2](https://jurnal.untan.ac.id/index.php/justin/article/view/18455)]. Selain itu, penelitian dari **Saiful et al. (2021)** menunjukkan bahwa penggunaan machine learning dengan algoritma linear regression dapat memberikan prediksi harga rumah dengan tingkat akurasi yang memuaskan [[3](https://jurnal.mdp.ac.id/index.php/jatisi/article/view/701)]. Namun, penelitian dari **Haryanto et al. (2023)** menunjukkan bahwa algoritma random forest regression memberikan akurasi yang lebih tinggi dalam memprediksi harga rumah dibandingkan dengan metode lainnya [[4](https://ejournal.itn.ac.id/index.php/jati/article/view/6343)]. 
 
 Oleh karena itu, penting bagi pengembang properti untuk memiliki pemahaman mendalam mengenai faktor-faktor yang memengaruhi harga rumah di kecamatan Tebet. Prediksi akan digunakan untuk menentukan berapa harga yang pantas untuk properti rumah berdasarkan pertimbangan faktor-faktor tertentu sehingga pengembang properti bisa mendapatkan profit sebesar mungkin. Tidak adanya acuan harga rumah, seperti acuan harga emas, mendorong kebutuhan akan sistem prediksi yang dapat membantu mengurangi risiko kerugian dalam pengembangan properti. Sehingga, pada proyek ini akan dibuat model prediksi untuk memprediksi harga rumah di kecamatan Tebet dengan algoritma machine learning regresi, seperti SVR, Random Forest dan Gradient Boosting.
 
@@ -64,15 +64,19 @@ Tipe Data | 7 fitur bertipe int64 dan 1 fitur bertipe object
 5. Exploratory Data Analysis - Univariate and Multivariate Analysis.
 
 #### 1. Data Loading
-Pada tahap ini, hal pertama yang perlu dilakukan adalah mengimpor library **pandas** untuk memuat dataset berformat Excel ke dalam dataframe menggunakan fungsi `read_excel()` yang tersedia dalam library tersebut. Dataset yang saya gunakan bernama DATA RUMAH.xlsx. Adapun outputnya sebagai berikut:
-![1-data-awal.png](https://drive.google.com/uc?export=view&id=1fwbfZPOcjlBP0F41WCwrruq8NZJDG0y1)
+Pada tahap ini, hal pertama yang perlu dilakukan adalah mengimpor library **pandas** untuk memuat dataset berformat Excel ke dalam dataframe menggunakan fungsi `read_excel()` yang tersedia dalam library tersebut. Dataset yang saya gunakan bernama DATA RUMAH.xlsx. Adapun outputnya sebagai berikut: 
+
+![1-data-awal](https://github.com/balle97/model-regresi/assets/128248022/06626c41-1feb-4700-9954-bb0bf2870a34) 
+
 Dari output di atas terlihat bahwa:
 * Terdapat 1.010 baris (records atau jumlah pengamatan) dalam dataset.
 * Terdapat 8 kolom yaitu: NO, NAMA RUMAH, HARGA, LB, LT, KT, KM, GRS.
 
 #### 2. Exploratory Data Analysis - Description of Variables
-Langkah selanjutnya adalah mengecek informasi pada dataset menggunakan fungsi `info()`. Adapun outputnya sebagai berikut:
-![2-info-tipe-data.png](https://drive.google.com/uc?export=view&id=1utcg1VNjT-VJAyjZ8lwLFF5TTMoKHFDK)
+Langkah selanjutnya adalah mengecek informasi pada dataset menggunakan fungsi `info()`. Adapun outputnya sebagai berikut: 
+
+![2-info-tipe-data](https://github.com/balle97/model-regresi/assets/128248022/2416687c-0f24-4a33-ac75-a7af0097092b) 
+
 Dari output di atas terlihat bahwa:
 * Terdapat 1 kolom dengan tipe data object, yaitu: NAMA RUMAH. Kolom ini merupakan fitur non-numerik, tapi bukan fitur kategorikal.
 * Terdapat 6 kolom numerik dengan tipe data int64 yaitu: NO, LB, LT, KT, KM, GRS. Kolom ini merupakan fitur numerik.
@@ -90,35 +94,51 @@ Fungsi `describe()` memberikan informasi statistik pada masing-masing kolom, ant
 * 75% : kuartil ketiga.
 * Max : nilai maksimum.
 Adapun outputnya sebagai berikut:
-![3-deskripsi-statistik.png](https://drive.google.com/uc?export=view&id=1gKPxF3MwvQUWfRy40D0BVc5jbzH8f965)
+
+![3-deskripsi-statistik](https://github.com/balle97/model-regresi/assets/128248022/e9c4aa7d-1d89-46b3-873c-15e5c0a98a97)
+
 Dari output di atas terlihat bahwa nilai minimum 0 hanya terdapat pada kolom 'GRS'. Nilai tersebut bermakna bahwa ada beberapa rumah yang tidak memiliki garasi mobil, sehingga itu merupakan hal yang wajar. Jadi, patut diduga bahwa ini merupakan data yang valid atau bukan _missing value_. 
 
 #### 3. Exploratory Data Analysis - Handling Missing Values, Drop Unnecessary Columns, and Duplicates
 **a. Handling Missing Values**
-Setelah mengecek nilai minimum 0, langkah selanjutnya adalah menangani _missing value_ menggunakan fungsi `isnull().sum()`. Adapun outputnya sebagai berikut:
-![4-value.png](https://drive.google.com/uc?export=view&id=180jwIvXZoSzwxYshXr8pB1qmurJEj_hh)
+Setelah mengecek nilai minimum 0, langkah selanjutnya adalah menangani _missing value_ menggunakan fungsi `isnull().sum()`. Adapun outputnya sebagai berikut: 
+
+![4-value](https://github.com/balle97/model-regresi/assets/128248022/16658e8e-6b74-4460-967d-df78e8238113) 
+
 Dari output di atas terlihat bahwa semua kolom tidak memiliki _missing value_. 
 
 Ada beberapa teknik untuk mengatasi missing value, antara lain: menghapus atau melakukan drop terhadap data yang hilang, menggantinya dengan mean atau median, serta memprediksi dan mengganti nilainya dengan teknik regresi. Tapi, untuk proyek ini, semua teknik tersebut tidak diperlukan.
 
 **b. Drop Unnecessary Columns**
-Setelah mengecek _missing value_, langkah selanjutnya adalah membuat kolom baru untuk mempermudah melihat harga rumah. Kolom tersebut diberi nama 'HARGA(JUTA)'. Untuk melakukannya, bagi nilai harga dengan nilai 1.000.000 (satu juta) untuk menghilangkan angka 0 sebanyak 6 digit. Adapun outputnya sebagai berikut:
-![5-kolom-baru.png](https://drive.google.com/uc?export=view&id=1AxOEjbYyn2IoDJo9sZREXyVXdchhb1Mn)
+Setelah mengecek _missing value_, langkah selanjutnya adalah membuat kolom baru untuk mempermudah melihat harga rumah. Kolom tersebut diberi nama 'HARGA(JUTA)'. Untuk melakukannya, bagi nilai harga dengan nilai 1.000.000 (satu juta) untuk menghilangkan angka 0 sebanyak 6 digit. Adapun outputnya sebagai berikut: 
+
+![5-kolom-baru](https://github.com/balle97/model-regresi/assets/128248022/bb41ad16-28d5-4eb1-9eae-bbffdb7a4b5e) 
+
 Dari output di atas terlihat bahwa kolom pada tabel di atas sekarang berjumlah **9 kolom**.
 
-Setelah itu, menghapus kolom yang tidak diperlukan menggunakan fungsi `drop()`. Kolom yang dimaksud adalah 'NO', 'NAMA HARGA', 'HARGA'. Adapun outputnya sebagai berikut:
-![6-hapus-kolom.png](https://drive.google.com/uc?export=view&id=195N4gI4d8qgHiXrPM06sQLgv1l95-0O5)
+Setelah itu, menghapus kolom yang tidak diperlukan menggunakan fungsi `drop()`. Kolom yang dimaksud adalah 'NO', 'NAMA HARGA', 'HARGA'. Adapun outputnya sebagai berikut: 
+
+![6-hapus-kolom](https://github.com/balle97/model-regresi/assets/128248022/964d6fe3-15cc-4911-9e33-984ecae261e2) 
+
 Dari output di atas terlihat bahwa kolom pada tabel di atas sekarang tersisa **6 kolom**.
 
 **c. Handling Duplicates**
-Selanjutnya, menangani _duplicate_ data menggunakan fungsi `drop.duplicates()`. Adapun outputnya sebagai berikut:
-![7-duplikasi.png](https://drive.google.com/uc?export=view&id=1xDkBhocsKEr8-MNdOM1fPYZWVGbv3GHk)
+Selanjutnya, menangani _duplicate_ data menggunakan fungsi `drop.duplicates()`. Adapun outputnya sebagai berikut: 
+
+![7-duplikasi](https://github.com/balle97/model-regresi/assets/128248022/76133453-ba66-479d-b58c-ab30c8bff815) 
+
 Dari output di atas terlihat bahwa adanya perubahan pada ukuran dataset dari 1.010 baris menjadi **967 baris**. Hal ini menunjukkan bahwa di dalam dataset tersebut terdapat duplikasi data sebesar **43 baris**.
 
 #### 4. Exploratory Data Analysis - Visualizing and Handling Outliers
 **a. Visualize Outliers on Numerical Features**
-Pada tahap ini, akan dideteksi outlier menggunakan teknik visualisasi data (*boxplot*). Akan divisualisasikan data numerik dengan *boxplot* secara horizontal. Menurut **Seltman** dalam “*Experimental Design and Analysis*”, *boxplot* menunjukkan ukuran lokasi dan penyebaran, serta memberikan informasi tentang simetri dan *outliers*. Adapun outputnya sebagai berikut:
-![8-outlier-LB.png](https://drive.google.com/uc?export=view&id=1yyy7AVKsTY0L-4P_nPFgbt7MbSdxP6A3) ![8-outlier-LT.png](https://drive.google.com/uc?export=view&id=1JSSaZm0aW9o7uyzWMDUJ0pIXdrhNpJRj) ![8-outlier-KT.png](https://drive.google.com/uc?export=view&id=1SGAQ6a9gsXimFrJothT0ldxmQROxAS4B) ![8-outlier-KM.png](https://drive.google.com/uc?export=view&id=1ptsQyjB5iOdOHY16KB5rJ-WqEpfZEWaU) ![8-outlier-GRS.png](https://drive.google.com/uc?export=view&id=1MF5VCDDlDDKE8fYHFgmvu48PTW8211Vj)
+Pada tahap ini, akan dideteksi outlier menggunakan teknik visualisasi data (*boxplot*). Akan divisualisasikan data numerik dengan *boxplot* secara horizontal. Menurut **Seltman** dalam “*Experimental Design and Analysis*”, *boxplot* menunjukkan ukuran lokasi dan penyebaran, serta memberikan informasi tentang simetri dan *outliers*. Adapun outputnya sebagai berikut: 
+
+![8-outlier-LB](https://github.com/balle97/model-regresi/assets/128248022/291a967a-18bc-4545-b9a0-411359dd4adb) 
+![8-outlier-LT](https://github.com/balle97/model-regresi/assets/128248022/a198da21-fd5c-44e7-85ba-6de67335a4af) 
+![8-outlier-KT](https://github.com/balle97/model-regresi/assets/128248022/7ee385a7-d1cb-4505-b55a-91e1d85e4265)
+![8-outlier-KM](https://github.com/balle97/model-regresi/assets/128248022/fe9b3872-5413-4abb-9808-4e28c93c501e)
+![8-outlier-GRS](https://github.com/balle97/model-regresi/assets/128248022/678f5476-7953-46c7-8b59-74f9ef0ab1fd)  
+
 Dari output di atas terlihat bahwa semua kolom memiliki _outliers_. 
 
 **b. Handle Outliers with IQR Method**
@@ -126,43 +146,58 @@ Ada beberapa teknik untuk menangani _outliers_, antara lain: Hypothesis Testing,
 
 Menurut **Seltman** dalam “*Experimental Design and Analysis*”, *outliers* yang diidentifikasi oleh boxplot disebut juga **boxplot outliers** yang didefinisikan sebagai data yang nilainya 1.5 QR di atas Q3 atau 1.5 QR di bawah Q1.
 
-Hal pertama yang perlu dilakukan adalah membuat batas bawah dan batas atas. Berikut persamaan matematikanya:
-![9-metode-IQR.png](https://drive.google.com/uc?export=view&id=11-uF41J9jycxfSNR8vC1Y0f48aX_708k)
-Akan diterapkan persamaan di atas ke dalam code berikut:
+Hal pertama yang perlu dilakukan adalah membuat batas bawah dan batas atas. Berikut persamaan matematikanya: 
+
+![1-metode IQR](https://github.com/balle97/model-regresi/assets/128248022/3a12e41a-4c86-4816-82d8-14183b2db0b8) 
+
+Akan diterapkan persamaan di atas ke dalam code berikut: 
+
 `Q1 = df.quantile(0.25)`
+
 `Q3 = df.quantile(0.75)`
+
 `IQR = Q3 - Q1`
+
 `df = df[~((df < (Q1-1.5*IQR)) | (df > (Q3+1.5*IQR))).any(axis=1)]`
 
-Perlu mengecek ukuran dataset setelah di-drop outliers menggunakan fungsi `shape()`. Adapun outputnya sebagai berikut:
-![10-shape.png](https://drive.google.com/uc?export=view&id=1UacAlojgYhuN2IlQ0yh5K4afOKgzGCyM)
+Perlu mengecek ukuran dataset setelah di-drop outliers menggunakan fungsi `shape()`. Adapun outputnya sebagai berikut: 
+
+![10-shape](https://github.com/balle97/model-regresi/assets/128248022/fee221e5-8126-460c-9d8b-8a1d48c62699) 
+
 Datasetnya sekarang sudah bersih dan memiliki **667 sampel**.
 
 #### 5. Exploratory Data Analysis - Univariate and Multivariate Analysis
 **a. Univariate Analysis**
-Untuk proyek ini, hanya melakukan _univariate analysis_ pada fitur numerik saja. Karena dataset yang digunakan tidak memiliki fitur categorikal. Akan menggunakan histogram untuk melihat masing-masing fitur tersebut. Adapun outputnya sebagai berikut:
-![11-univariate.png](https://drive.google.com/uc?export=view&id=1SS8xFK4a5w5YdUPhaUWHutNAFHcTrtga)
+Untuk proyek ini, hanya melakukan _univariate analysis_ pada fitur numerik saja. Karena dataset yang digunakan tidak memiliki fitur categorikal. Akan menggunakan histogram untuk melihat masing-masing fitur tersebut. Adapun outputnya sebagai berikut: 
+
+![11-univariate](https://github.com/balle97/model-regresi/assets/128248022/735041c9-c24e-4008-b40d-26619be99c18) 
+
 Lihatlah histogram untuk variabel "HARGA(JUTA)" yang merupakan fitur target (label). Dari histogram "HARGA(JUTA)", dapat diperoleh beberapa informasi, antara lain:
 * Peningkatan harga rumah sebanding dengan penurunan jumlah sampel. Hal ini dapat terlihat jelas dari histogram "HARGA(JUTA)" yang grafiknya mengalami penurunan seiring dengan semakin banyaknya jumlah sampel pada sumbu y.
 * Distribusi harga miring ke kanan (right-skewed). Hal ini akan berimplikasi pada model.
 
 **b. Multivariate Analysis**
-Untuk proyek ini, hanya melakukan _multivariate analysis_ pada fitur numerik saja. Karena dataset yang digunakan tidak memiliki fitur categorikal. Akan mengamati hubungan antar fitur numerik menggunakan fungsi `pairplot()`. Fungsi pairplot dari library seaborn menunjukkan relasi pasangan dalam dataset. Adapun outputnya sebagai berikut:
-![12-multivariate.png](https://drive.google.com/uc?export=view&id=19_XB3a_V2UY9FGOZ-ZIlVTaT-lDHHBty)
+Untuk proyek ini, hanya melakukan _multivariate analysis_ pada fitur numerik saja. Karena dataset yang digunakan tidak memiliki fitur categorikal. Akan mengamati hubungan antar fitur numerik menggunakan fungsi `pairplot()`. Fungsi pairplot dari library seaborn menunjukkan relasi pasangan dalam dataset. Adapun outputnya sebagai berikut: 
+
+![12-multivariate](https://github.com/balle97/model-regresi/assets/128248022/671147c0-adb0-4595-81db-16df64f11dab) 
+
 Dari output di atas, dapat terlihat relasi antara semua fitur numerik dengan fitur target yaitu ‘HARGA(JUTA)’. 
 
 Untuk membacanya, lihat fitur pada sumbu y, cari fitur target ‘HARGA(JUTA)’, dan lihat grafik relasi antara semua fitur pada sumbu x dengan fitur target ‘HARGA(JUTA)’ pada sumbu y. Dalam hal ini, fitur ‘HARGA(JUTA)’ berada pada baris terakhir pada sumbu y. Jadi, cukup dilihat relasi antar fitur numerik dengan fitur target ‘HARGA(JUTA)’ pada baris tersebut saja.
 
-Pada pola sebaran data grafik pairplot diatas, terlihat ‘LB’, ‘LT’ memiliki korelasi yang tinggi dengan fitur "HARGA(JUTA)". Oleh karena itu, perlu melakukan evaluasi skor korelasi antara fitur numerik dengan fitur target menggunakan fungsi `corr()` dan fungsi `heatmap()`. Adapun outputnya sebagai berikut:
-![13-correlation-matrix.png](https://drive.google.com/uc?export=view&id=158iOMDJlJXzZV66znoLJmTgSjTZCMWrE)
+Pada pola sebaran data grafik pairplot diatas, terlihat ‘LB’, ‘LT’ memiliki korelasi yang tinggi dengan fitur "HARGA(JUTA)". Oleh karena itu, perlu melakukan evaluasi skor korelasi antara fitur numerik dengan fitur target menggunakan fungsi `corr()` dan fungsi `heatmap()`. Adapun outputnya sebagai berikut: 
+
+![13-correlation-matrix](https://github.com/balle97/model-regresi/assets/128248022/d7b6572d-f797-4984-8f82-a4875adafce9) 
+
 Dari output diatas terlihat bahwa koefisien korelasi berkisar antara 0 dan 1. Nilai ini untuk mengukur kekuatan hubungan antara dua variabel serta arahnya (positif atau negatif). Mengenai kekuatan hubungan antar variabel, semakin dekat nilainya ke 1, korelasinya semakin kuat. Sedangkan, semakin dekat nilainya ke 0, korelasinya semakin lemah.  
 
 Arah korelasi antara dua variabel bisa bernilai positif (nilai kedua variabel cenderung meningkat bersama-sama) maupun negatif (nilai salah satu variabel cenderung meningkat ketika nilai variabel lainnya menurun).
 
 Lihatlah grafik korelasi di atas. Jika diamati, fitur ‘LB’, ‘LT’ memiliki skor korelasi yang besar (di atas 0.6) dengan fitur target ‘HARGA(JUTA)’. Artinya, fitur 'HARGA(JUTA)' berkorelasi tinggi dengan kedua fitur tersebut.
 
-Selanjutnya, mengecek fitur yang memiliki korelasi tinggi tersebut menggunakan fungsi `pairplot()`. Adapun outputnya sebagai berikut:
-![14-korelasi-tinggi.png](https://drive.google.com/uc?export=view&id=1a-nBIBUmLyBE1mBvnVdJ8Z03_CV8ZFnL)
+Selanjutnya, mengecek fitur yang memiliki korelasi tinggi tersebut menggunakan fungsi `pairplot()`. Adapun outputnya sebagai berikut: 
+
+![14-korelasi-tinggi](https://github.com/balle97/model-regresi/assets/128248022/bff09e32-f43c-4052-b12f-9ee841ce1aa3)
 
 ## Data Preparation
 
@@ -175,12 +210,18 @@ Sebelum membuat model, ada tahap yang harus dilakukan terlebih dulu yaitu membag
 
 Karena data uji berperan sebagai data baru, maka perlu melakukan semua proses transformasi di dalam data latih. Akan dibagi dataset sebelum melakukan transformasi apapun agar tidak mengotori data uji dengan informasi yang didapat dari data latih. Tujuan dari data uji adalah untuk mengukur kinerja model pada data baru.
 
-Pada proyek ini, akan menggunakan proporsi pembagian sebesar 90:10 dengan fungsi `train_test_split()` dari sklearn. Untuk mengecek jumlah sampel pada masing-masing bagian, gunakan code berikut:
+Pada proyek ini, akan menggunakan proporsi pembagian sebesar 90:10 dengan fungsi `train_test_split()` dari sklearn. Untuk mengecek jumlah sampel pada masing-masing bagian, gunakan code berikut: 
+
 `print(f'Total sampel pada seluruh dataset: {len(X)}')`
+
 `print(f'Total sampel pada training set: {len(X_train)}')`
+
 `print(f'Total sampel pada testing set: {len(X_test)}')`
-Adapun outputnya sebagai berikut:
-![15-splitting.png](https://drive.google.com/uc?export=view&id=1DOYXtROdf2pVFzo07UNkkicqIMfV8BG5)
+
+Adapun outputnya sebagai berikut: 
+
+![15-splitting](https://github.com/balle97/model-regresi/assets/128248022/a18c1414-cfc4-40bc-b935-d5f83518d39f) 
+
 Dari output di atas terlihat bahwa dataset berjumlah **667 sampel** dari 1.010 sampel. Jumlahnya berkurang karena sudah melewati _Data Cleaning_ pada tahap sebelumnya. Dengan proporsi pembagian 90:10, maka data uji akan berjumlah **67 sampel**. Tentu ini merupakan jumlah yang sudah cukup karena tidak perlu jumlah sampel yang banyak hanya untuk proses pengujian. 
 
 ### 2. Scalling Dataset with MinMaxScaller
@@ -188,8 +229,10 @@ Setelah membagi dataset, langkah selanjutnya adalah melakukan proses transformas
 
 Cara kerjanya adalah dengan mengubah setiap nilai fitur dalam dataset menjadi nilai yang sesuai dengan rentang yang ditentukan, di mana nilai terkecil dalam setiap fitur akan diubah menjadi 0, sedangkan nilai terbesar akan diubah menjadi 1, dan nilai-nilai lainnya akan diubah secara proporsional sesuai dengan skala yang ditentukan.
 
-MinMaxScaler membantu mengatasi perbedaan skala antara fitur-fitur yang berbeda dalam dataset, sehingga memungkinkan algoritma machine learning untuk bekerja lebih baik dengan data tersebut. Adapun outputnya sebagai berikut:
-![16-scalling-train.png](https://drive.google.com/uc?export=view&id=13adxgKJTuIw6to9dTCbh9_SXIQtPm36U)
+MinMaxScaler membantu mengatasi perbedaan skala antara fitur-fitur yang berbeda dalam dataset, sehingga memungkinkan algoritma machine learning untuk bekerja lebih baik dengan data tersebut. Adapun outputnya sebagai berikut: 
+
+![16-scalling-train](https://github.com/balle97/model-regresi/assets/128248022/5121bc7b-021b-4e4b-9ae2-d742eb808cdf) 
+
 Dari output di atas terlihat bahwa skala fitur sudah relatif sama. Sehingga dataset sudah siap digunakan dalam algoritma machine learning.
 
 ## Modeling
@@ -291,32 +334,39 @@ Berikut ini beberapa parameter yang digunakan pada model Gradient Boosting, anta
 
 Pada tahap ini, akan dilakukan evaluasi model yang sudah dilakukan proses training sebelumnya. Secara umum, hampir semua metrik adalah sama. Jika prediksi mendekati nilai sebenarnya, performanya baik. Sedangkan jika tidak, performanya buruk. Secara teknis, selisih antara nilai sebenarnya dan nilai prediksi disebut eror. Maka, semua metrik mengukur seberapa kecil nilai eror tersebut.
 
-Metrik yang digunakan di proyek ini adalah **MSE (Mean Squared Error)** yang menghitung jumlah selisih kuadrat rata-rata nilai sebenarnya dengan nilai prediksi. Berikut persamaannya:
+Metrik yang digunakan di proyek ini adalah **MSE (Mean Squared Error)** yang menghitung jumlah selisih kuadrat rata-rata nilai sebenarnya dengan nilai prediksi. Berikut persamaannya: 
 
-![mse.png](https://drive.google.com/uc?export=view&id=1RKPeJ788wwBjUT38G_NHVT2voTAc4xFj)
+![2-mse](https://github.com/balle97/model-regresi/assets/128248022/7d15ef95-90a6-4bc2-be25-5da28205ab97)
 
 ### 1. Scalling Dataset with MinMaxScaller
-Sebelum menghitung nilai MSE dalam model, perlu dilakukan proses scaling fitur numerik pada data uji. Sebelumnya, sudah melakukan proses scaling pada data latih untuk menghindari kebocoran data. Hal ini harus dilakukan agar skala antara data latih dan data uji sama dan agar bisa dilakukan tahap evaluasi model. Adapun outputnya sebagai berikut:
-![17-scalling-test.png](https://drive.google.com/uc?export=view&id=1V3qkW2nvxQQ9Xf07KVozQuTh1cs1z2mn)
+Sebelum menghitung nilai MSE dalam model, perlu dilakukan proses scaling fitur numerik pada data uji. Sebelumnya, sudah melakukan proses scaling pada data latih untuk menghindari kebocoran data. Hal ini harus dilakukan agar skala antara data latih dan data uji sama dan agar bisa dilakukan tahap evaluasi model. Adapun outputnya sebagai berikut: 
+
+![17-scalling-test](https://github.com/balle97/model-regresi/assets/128248022/38ea368d-8eda-4740-8824-055106fa03be) 
+
 Dari output di atas terlihat bahwa skala fitur sudah relatif sama. Sehingga dataset sudah bisa digunakan untuk tahap evaluasi model.
 
 ### 2. Evaluate Model with MSE
-Setelah selesai scalling data uji, langkah selanjutnya adalah dilakukan evaluasi model menggunakan metrik MSE yang menghitung jumlah selisih kuadrat rata-rata nilai sebenarnya dengan nilai prediksi. Saat menghitung nilai **MSE (Mean Squared Error)** pada data latih dan data uji, akan dibagi dengan nilai 1e3 agar nilai MSE berada dalam skala yang tidak terlalu besar. Adapun outputnya sebagai berikut:
-![18-metrik-mse.png](https://drive.google.com/uc?export=view&id=1JaNcxdT_DSdL6GQfLqliOicgyvF_Lo6o)
+Setelah selesai scalling data uji, langkah selanjutnya adalah dilakukan evaluasi model menggunakan metrik MSE yang menghitung jumlah selisih kuadrat rata-rata nilai sebenarnya dengan nilai prediksi. Saat menghitung nilai **MSE (Mean Squared Error)** pada data latih dan data uji, akan dibagi dengan nilai 1e3 agar nilai MSE berada dalam skala yang tidak terlalu besar. Adapun outputnya sebagai berikut: 
 
-Selanjutnya, membuat plot metrik mse dengan bar chart. Adapun outputnya sebagai berikut:
-![19-plot-metrik-mse.png](https://drive.google.com/uc?export=view&id=1b6aRHGoA1v1r7mpJF6JDr-CpCqV55a4u)
+![18-metrik-mse](https://github.com/balle97/model-regresi/assets/128248022/8bc92771-44ae-4615-93b4-4e9f3fdb070c)
+
+Selanjutnya, membuat plot metrik mse dengan bar chart. Adapun outputnya sebagai berikut: 
+
+![19-plot-metrik-mse](https://github.com/balle97/model-regresi/assets/128248022/da1df910-a0fb-48a0-8842-23c13ca500ff) 
+
 Dari output di atas terlihat bahwa model Random Forest dan Gradient Boosting menghasilkan nilai eror yang paling kecil. Sedangkan model dengan algoritma SVR menghasilkan nilai eror yang paling besar.
 
-Selanjutnya, melakukan proses uji model dengan memprediksi nilai asli(y_true). Adapun outputnya sebagai berikut:
-![20-testing.png](https://drive.google.com/uc?export=view&id=1bTXLikR6SLUhIva9i69_bIJU8TZQCaIK)
+Selanjutnya, melakukan proses uji model dengan memprediksi nilai asli(y_true). Adapun outputnya sebagai berikut: 
+
+![20-testing](https://github.com/balle97/model-regresi/assets/128248022/e9aca260-0bba-402f-b0cf-7690354787b7)
+
 Dari output di atas terlihat bahwa prediksi dengan model **Random Forest** dan **Gradient Boosting** memberikan hasil yang paling mendekati dengan harga aslinya. Jadi, Model **Random Forest** yang akan dipilih sebagai model terbaik untuk melakukan prediksi harga rumah.
 
 ## Referensi
-[1](https://www.researchgate.net/publication/325656226_KOMPOSISI_HARGA_JUAL_RUMAH_TINGGAL_LAYAK_HUNI_DI_YOGYAKARTA_STUDI_KASUS_PEMBANGUNAN_RUMAH_TIPE_90115_DI_LUAR_KOMPLEKS_PERUMAHAN)Musyafa, A. (2013). Komposisi Harga Jual Rumah Tinggal Layak Huni Di Yogyakarta (Studi Kasus Pembangunan Rumah Tipe 90/115 di Luar Kompleks Perumahan) (004K). Konferensi Nasional Teknik Sipil 7 (KoNTekS 7), 7-12.
+[[1](https://www.researchgate.net/publication/325656226_KOMPOSISI_HARGA_JUAL_RUMAH_TINGGAL_LAYAK_HUNI_DI_YOGYAKARTA_STUDI_KASUS_PEMBANGUNAN_RUMAH_TIPE_90115_DI_LUAR_KOMPLEKS_PERUMAHAN)] Musyafa, A. (2013). Komposisi Harga Jual Rumah Tinggal Layak Huni Di Yogyakarta (Studi Kasus Pembangunan Rumah Tipe 90/115 di Luar Kompleks Perumahan) (004K). Konferensi Nasional Teknik Sipil 7 (KoNTekS 7), 7-12.
 
-[2](https://jurnal.untan.ac.id/index.php/justin/article/view/18455)Hendra, Tursina, & Nyoto, R. D. (2017). Case Base Reasoning Penentuan Harga Rumah dengan Menggunakan Metode Tversky (Studi Kasus : Kota Pontianak). Jurnal Sistem Dan Teknologi Informasi (JUSTIN), 5(2), 75–79.
+[[2](https://jurnal.untan.ac.id/index.php/justin/article/view/18455)] Hendra, Tursina, & Nyoto, R. D. (2017). Case Base Reasoning Penentuan Harga Rumah dengan Menggunakan Metode Tversky (Studi Kasus : Kota Pontianak). Jurnal Sistem Dan Teknologi Informasi (JUSTIN), 5(2), 75–79.
 
-[3](https://jurnal.mdp.ac.id/index.php/jatisi/article/view/701)Saiful, A., Andryana, S. & Gunaryati, A. (2021). Prediksi Harga Rumah Menggunakan Web Scrapping Dan Machine Learning Dengan Algoritma Linear Regression. Jurnal Teknik Informatika dan Sistem Informasi (JATISI), 8(1), 41-50. https://doi.org/10.35957/jatisi.v8i1.701.
+[[3](https://jurnal.mdp.ac.id/index.php/jatisi/article/view/701)] Saiful, A., Andryana, S. & Gunaryati, A. (2021). Prediksi Harga Rumah Menggunakan Web Scrapping Dan Machine Learning Dengan Algoritma Linear Regression. Jurnal Teknik Informatika dan Sistem Informasi (JATISI), 8(1), 41-50. https://doi.org/10.35957/jatisi.v8i1.701.
 
-[4](https://ejournal.itn.ac.id/index.php/jati/article/view/6343)Haryanto, C., Rahaningsih, N. & Basysyar, F. M. (2023). Komparasi Algoritma Machine Learning dalam Memprediksi Harga Rumah. JATI (Jurnal Mahasiswa Teknik Informatika), 7(1), 533-539. https://doi.org/10.36040/jati.v7i1.6343.
+[[4](https://ejournal.itn.ac.id/index.php/jati/article/view/6343)] Haryanto, C., Rahaningsih, N. & Basysyar, F. M. (2023). Komparasi Algoritma Machine Learning dalam Memprediksi Harga Rumah. JATI (Jurnal Mahasiswa Teknik Informatika), 7(1), 533-539. https://doi.org/10.36040/jati.v7i1.6343.
